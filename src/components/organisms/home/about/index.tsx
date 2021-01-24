@@ -23,7 +23,7 @@ const About: FC = () => {
               {/* project{" "}
               <Link to="/portfolio">portfolio</Link> and */}
               <a
-                href="Luis_Eduardo_D%C3%ADaz_Ni%C3%B1o_de_Rivera_-_Software_Engineer.pdf"
+                href="Luis_Diaz_Software_Engineer.pdf"
                 target="_blank"
               >
                 {" "}
@@ -40,7 +40,7 @@ const About: FC = () => {
                 <span className="d-none d-md-inline">View</span> Portfolio
               </Link> */}
               <a
-                href="Luis_Eduardo_D%C3%ADaz_Ni%C3%B1o_de_Rivera_-_Software_Engineer.pdf"
+                href="Luis_Diaz_Software_Engineer.pdf"
                 target="_blank"
                 className="btn btn-secondary mb-3"
               >
