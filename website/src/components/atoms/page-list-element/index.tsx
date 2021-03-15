@@ -27,7 +27,7 @@ const PageListElement: FC<IPageList> = ({
   return (
     <NavLink to={path} activeClassName="active" className="nav-item">
       <li className="nav-link">
-        <FontAwesomeIcon icon={[prefix, icon]} className="mr-2 fa-fw" />
+        <FontAwesomeIcon icon={[prefix, icon]} className="mx-2 fa-fw" />
         {name}
       </li>
     </NavLink>

@@ -89,6 +89,7 @@ body.dark-mode {
 		}
 
 		.nav-item {
+      font-weight: 700;
 			&.active {
 				.nav-link {
 					color: $theme-color-primary;

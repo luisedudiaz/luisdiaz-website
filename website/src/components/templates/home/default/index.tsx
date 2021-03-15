@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import About from "../../../organisms/home/about";
 import Blog from "../../../organisms/home/blog";
 import Featured from "../../../organisms/home/featured";
 import Overview from "../../../organisms/home/overview";
 import Testimonials from "../../../organisms/home/testimonials";
 import SEO from "../../../organisms/seo";
-import "./index.scss"
+import "./index.scss";
 
-const Home : FC = () => {
+const Home: FC = () => {
   return (
     <div>
       <SEO title="Home">
@@ -41,4 +41,4 @@ const Home : FC = () => {
   );
 };
 
-export default Home
+export default Home;

@@ -117,7 +117,7 @@ const Overview: FC = () => {
         </div>
         {/*<div className="text-center py-3">
         <Link to="/services" className="btn btn-primary">
-          <FontAwesomeIcon icon={faArrowAltCircleRight} className="mr-2" />Services &amp; Pricing
+          <FontAwesomeIcon icon={faArrowAltCircleRight} className="me-2" />Services &amp; Pricing
         </Link>
       </div>*/}
       </div>

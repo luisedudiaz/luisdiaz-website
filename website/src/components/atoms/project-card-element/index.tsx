@@ -46,7 +46,7 @@ const ProjectCard: FC<IProjectCard> = ({
           <Link className="link-mask-link" to={`/portfolio/${path}`} />
           <div className="link-mask-text">
             <Link className="btn btn-secondary" to={`/portfolio/${path}`}>
-              <FontAwesomeIcon icon={faEye} className="mr-2" />
+              <FontAwesomeIcon icon={faEye} className="me-2" />
               View Case Study
             </Link>
           </div>

@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Routes from "./routes";
 import reportWebVitals from "./reportWebVitals";
-import "./styles/index.scss";
 import Providers from "./providers";
+import "bootstrap";
+import "./styles/index.scss";
 
 ReactDOM.render(
   <Providers>

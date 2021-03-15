@@ -25,7 +25,7 @@ const Header : FC = () => {
       </Helmet>
       <div className="force-overflow">
         {isLoggedIn && (
-          <h1 className="blog-name pt-lg-4 mb-0 text-right mr-3">
+          <h1 className="blog-name pt-lg-4 mb-0 text-right me-3">
             <FontAwesomeIcon onClick={() => logout!()} icon={faSignOutAlt} />
           </h1>
         )}
@@ -62,7 +62,7 @@ const Header : FC = () => {
             {/*
             <div className="my-2">
               <a className="btn btn-primary" href="contact.html" target="_blank">
-              <i className="fas fa-paper-plane mr-2"/>Hire Me</a>
+              <i className="fas fa-paper-plane me-2"/>Hire Me</a>
             </div> */}
 
             {!isLoggedIn && (
@@ -70,8 +70,8 @@ const Header : FC = () => {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#login"
+                  data-bs-toggle="modal"
+                  data-bs-target="#login"
                 >
                   Login
                 </button>
@@ -81,7 +81,7 @@ const Header : FC = () => {
             <div className="dark-mode-toggle text-center w-100">
               <hr className="mb-4" />
               <h4 className="toggle-name mb-3 ">
-                <FontAwesomeIcon icon={faAdjust} className="mr-1" />
+                <FontAwesomeIcon icon={faAdjust} className="mx-1" />
                 Dark Mode
               </h4>
               <input

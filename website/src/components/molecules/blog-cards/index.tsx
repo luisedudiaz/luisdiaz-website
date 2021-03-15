@@ -24,7 +24,7 @@ const BlogCards: FC = () => {
       <div className="text-center py-3">
         {blogs.length > 0 ? (
           <Link to="/blog" className="btn btn-primary">
-            <FontAwesomeIcon icon={faArrowAltCircleRight} className="mr-2" />
+            <FontAwesomeIcon icon={faArrowAltCircleRight} className="me-2" />
             View Blog
           </Link>
         ) : (

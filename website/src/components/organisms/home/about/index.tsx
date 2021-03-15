@@ -22,20 +22,20 @@ const About: FC = () => {
               Want to know how I may help your project? Check out my
               {/* project{" "}
               <Link to="/portfolio">portfolio</Link> and */}
+              {" "}
               <a
                 href="Luis_Diaz_Software_Engineer.pdf"
                 target="_blank"
               >
-                {" "}
                 online resume
               </a>
               .
             </div>
             <div className="mb-4">
-              {/* <Link to="/portfolio" className="btn btn-primary mr-2 mb-3">
+              {/* <Link to="/portfolio" className="btn btn-primary me-2 mb-3">
                 <FontAwesomeIcon
                   icon={faArrowAltCircleRight}
-                  className="mr-2"
+                  className="me-2"
                 />
                 <span className="d-none d-md-inline">View</span> Portfolio
               </Link> */}
@@ -44,7 +44,7 @@ const About: FC = () => {
                 target="_blank"
                 className="btn btn-secondary mb-3"
               >
-                <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+                <FontAwesomeIcon icon={faFileAlt} className="me-2" />
                 <span className="d-none d-md-inline">View</span> Resume
               </a>
             </div>

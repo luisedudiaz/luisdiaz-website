@@ -1,9 +1,9 @@
-import React, { FC, FormEvent, useContext, useState } from "react";
+import { FC, FormEvent, useContext, useState } from "react";
 import $ from 'jquery';
 import { useLoginMutation, User } from "../../../generated/graphql";
 import { context } from "../../../providers";
 
-const Login: FC = () => {
+const Login: FC<{}> = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -90,8 +90,9 @@ const Login: FC = () => {
       tabIndex={-1}
       role="dialog"
       aria-hidden="true"
-      data-backdrop="static"
-      data-keyboard="false"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      aria-labelledby="login"
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
