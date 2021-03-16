@@ -1,42 +1,85 @@
-import { useApolloClient } from "@apollo/client";
-import React, {
-  createContext,
-  Dispatch,
-  FC,
-  SetStateAction,
-  useState,
-} from "react";
-import { useLogoutMutation, User } from "../generated/graphql";
-
+import { createContext, FC, useEffect, useState } from "react";
+import { Roles } from "../config/roles.config";
+import firebase, { auth } from "../utils/firebase.utils";
+import { toast } from "react-toastify";
+import { getAllowedRoutes } from "../config/routes.config";
 interface IAuthContext {
-  user: User | null;
+  user: null | firebase.User;
   isLoggedIn: boolean;
-  setUser?: Dispatch<SetStateAction<User | null>>;
-  setIsLoggedIn?: Dispatch<React.SetStateAction<boolean>>;
+  roles: Roles[];
+  login?: (email: string, password: string) => Promise<void>;
   logout?: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   isLoggedIn: false,
   user: null,
+  roles: [],
 });
 
 const AuthProvider: FC = (props) => {
-  const u = localStorage.getItem("user") as unknown as User
-  const client = useApolloClient();
-  const [user, setUser] = useState<User | null>(u);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!u);
-  const [logoutMutation] = useLogoutMutation();
+  const [user, setUser] = useState<null | firebase.User>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!user);
+  const [roles, setRoles] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange();
+    return () => {
+      unsubscribe();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onAuthStateChange = () => {
+    return auth().onAuthStateChanged(async (user) => {
+      const result = await auth().currentUser?.getIdTokenResult();
+      const userRoles: Roles[] = result?.claims.roles;
+
+      if (getAllowedRoutes(userRoles).length === 0) {
+        logout!();
+        setUser(null);
+        setIsLoggedIn(false);
+        setRoles([]);
+      } else {
+        setUser(user);
+        setIsLoggedIn(!!user);
+        setRoles(result?.claims.roles);
+      }
+    });
+  };
 
   const logout = async () => {
     try {
+      await auth().signOut();
       setUser(null);
       setIsLoggedIn(false);
-      localStorage.clear();
-      await logoutMutation();
-      await client.clearStore();
+      setRoles([]);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const login = async (email: string, password: string) => {
+    try {
+      const user = (await auth().signInWithEmailAndPassword(email, password))
+        .user;
+      const result = await auth().currentUser?.getIdTokenResult();
+      const userRoles: Roles[] = result?.claims.roles;
+
+      if (getAllowedRoutes(userRoles).length === 0) {
+        logout!();
+        setUser(null);
+        setIsLoggedIn(false);
+        setRoles([]);
+        toast.warn("Contact your administrator.")
+      } else {
+        setUser(user);
+        setIsLoggedIn(!!user);
+        setRoles(result?.claims.roles);
+        toast.success(`Welcome, ${user?.displayName}`);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -45,9 +88,9 @@ const AuthProvider: FC = (props) => {
       value={{
         user,
         isLoggedIn,
-        setUser,
-        setIsLoggedIn,
+        roles,
         logout,
+        login,
       }}
     >
       {props.children}

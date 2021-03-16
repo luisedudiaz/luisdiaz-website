@@ -3,10 +3,12 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
+    "watch": "tsc --watch",
+    "serve": "npm run watch | firebase emulators:start --import=./database --export-on-exit",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
+    "deploy-firestore-rules": "firebase deploy --only firestore:rules",
     "logs": "firebase functions:log"
   },
   "engines": {

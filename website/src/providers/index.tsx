@@ -1,10 +1,10 @@
+import { FC } from "react";
 import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { FC } from "react";
 import AuthProvider, { AuthContext } from "./auth.provider";
 
 const client = new ApolloClient({
@@ -17,8 +17,8 @@ const client = new ApolloClient({
 
 export const context = {
   client,
-  auth: AuthContext
-}
+  auth: AuthContext,
+};
 
 const Providers: FC = (props) => {
   return (

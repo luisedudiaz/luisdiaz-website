@@ -1,10 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import Routes from "./routes";
+import Routes from "./router";
 import reportWebVitals from "./reportWebVitals";
 import Providers from "./providers";
 import "bootstrap";
 import "./styles/index.scss";
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <Providers>

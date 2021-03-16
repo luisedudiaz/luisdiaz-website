@@ -1,17 +1,12 @@
+import { Modal } from "bootstrap";
 import { FC, FormEvent, useContext, useState } from "react";
-import $ from 'jquery';
-import { useLoginMutation, User } from "../../../generated/graphql";
 import { context } from "../../../providers";
 
-const Login: FC<{}> = () => {
+const Login: FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login] = useLoginMutation();
-
-  const { isLoggedIn, setUser, setIsLoggedIn } = useContext(
-    context.auth
-  );
+  const { isLoggedIn, login } = useContext(context.auth);
 
   const hasError = (key: string) => {
     return errors.indexOf(key) !== -1;
@@ -29,21 +24,17 @@ const Login: FC<{}> = () => {
     if (e.length > 0) {
       setErrors([...errors, ...e]);
     } else {
-      const { data } = await login({
-        variables: { email, password },
-      });
-      if (data) {
-        const user: User = data.login;
-        setEmail("");
-        setPassword("");
-        setUser!(user);
-        setIsLoggedIn!(true);
-        localStorage.setItem("user", JSON.stringify(user))
-        $('.close').trigger("click");
-        document.querySelector(".modal-backdrop")?.remove()
-        document.querySelector(".modal-open")?.classList.remove('modal-open')
-      }
+      const loginModal = Modal.getInstance(document.querySelector("#login")!);
+      loginModal.hide();
+      clear()
+      await login!(email, password);
     }
+  };
+
+  const clear = () => {
+    setEmail("");
+    setPassword("");
+    setErrors([]);
   };
 
   const handleEmailInput = (event: FormEvent<HTMLInputElement>) => {
@@ -96,28 +87,21 @@ const Login: FC<{}> = () => {
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
-          <div className="modal-body">
-            <form
-              className="needs-validation"
-              noValidate
-              onSubmit={handleSubmit}
-            >
+          <form className="needs-validation" noValidate onSubmit={handleSubmit}>
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Login
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={clear}
+              ></button>
+            </div>
+            <div className="modal-body">
               <div className="row mb-3">
-                <div className="col-10">
-                  <h1>Login</h1>
-                </div>
-                <div className="col-2">
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              </div>
-              <div className="row">
                 <div className="col-12">
                   <div className="form-group">
                     <label className="sr-only">Email</label>
@@ -139,7 +123,7 @@ const Login: FC<{}> = () => {
                   </div>
                 </div>
               </div>
-              <div className="row">
+              <div className="row mb-3">
                 <div className="col-12">
                   <div className="form-group">
                     <label className="sr-only">Password</label>
@@ -161,19 +145,13 @@ const Login: FC<{}> = () => {
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-12">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    // data-dismiss={email !== "" && password !== "" && errors.length === 0 ? "modal": ""}
-                  >
-                    Login
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div className="modal-footer">
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
