@@ -1,12 +1,13 @@
-import { FC, useContext } from "react";
-import { context } from "../../../../providers";
+import { FC } from "react";
 
 const Dashboard: FC = () => {
-  const {logout} = useContext(context.auth)
-  return <div>
-    PRIVATE ROUTE
-    <button className="btn btn-primary" onClick={logout!}>LOGOUT</button>
-  </div>
-}
+  return (
+    <div className="p-grid">
+      <div className="p-col">
+        PRIVATE ROUTE
+      </div>
+    </div>
+  );
+};
 
 export default Dashboard;
