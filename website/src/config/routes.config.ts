@@ -1,40 +1,27 @@
-import {Roles} from "./roles.config";
-
-import Dashboard from "../pages/dashboard";
-import { FC } from "react";
 import { intersection } from "lodash";
+import { Roles, Link } from "../types";
 
-export interface IRoute {
-  component: FC
-  path: string
-  title?: string
-  exact?: boolean
-  permission?: Roles[]
-  children?: IRoute[]
-}
-
-const routes: IRoute[] = [
-  {
-    component: Dashboard,
-    path: "/",
-    title: "Dashboard",
-    exact: true,
-    permission: [
-      Roles.ADMIN
-    ],
-  }
-]
+// const routes: Route[] = [
+//   {
+//     component: Dashboard,
+//     path: "/",
+//     title: "Dashboard",
+//     exact: true,
+//     permission: [
+//       Roles.ADMIN
+//     ],
+//   }
+// ]
 
 export const isArrayWithLength = (arr: Roles[]) => {
   return Array.isArray(arr) && arr.length;
 };
 
-export const getAllowedRoutes = (roles: Roles[]) => {
-  return routes.filter(({ permission }) => {
-    if (!permission) return true;
-    else if (!isArrayWithLength(permission)) return true;
-    else return intersection(permission, roles).length;
+export const getAllowedRoutes = (roles: Roles[], links: Link[]) => {
+  return links.filter(({ permissions }) => {
+    if (!permissions) return true;
+    else if (!isArrayWithLength(permissions)) return true;
+    else return intersection(permissions, roles).length;
   });
 };
 
-export default routes;
