@@ -14,14 +14,12 @@ import {
   faVuejs,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { FC } from "react";
+import { FC } from "react";
 // import { Link } from "react-router-dom";
-
 interface IIcons {
   name: IconDefinition;
   className?: string;
 }
-
 interface ISkills {
   title: string;
   description: string;

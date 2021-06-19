@@ -1,17 +1,18 @@
 import { faAdjust, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { FC, useContext, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { context } from "../../../providers";
 import PagesList from "../../molecules/pages-list";
 import SocialsList from "../../molecules/socials-list";
 
-const Header : FC = () => {
+const Header: FC = () => {
   const isChecked = JSON.parse(sessionStorage.getItem("dark-mode")!);
-  const { isLoggedIn, logout } = useContext(context.auth);
+  const { isLoggedIn, logoutWithRedirect } = useContext(context.auth);
   const [checked, setChecked] = useState(isChecked);
+  const history = useHistory();
 
   const handleChangeDarkMode = () => {
     sessionStorage.setItem("dark-mode", JSON.stringify(!checked));
@@ -26,7 +27,10 @@ const Header : FC = () => {
       <div className="force-overflow">
         {isLoggedIn && (
           <h1 className="blog-name pt-lg-4 mb-0 text-right me-3">
-            <FontAwesomeIcon onClick={() => logout!()} icon={faSignOutAlt} />
+            <FontAwesomeIcon
+              onClick={() => logoutWithRedirect!(history)}
+              icon={faSignOutAlt}
+            />
           </h1>
         )}
         <h1 className="blog-name pt-lg-4 mb-0">
@@ -36,8 +40,8 @@ const Header : FC = () => {
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navigation"
+            data-bs-toggle="collapse"
+            data-bs-target="#navigation"
             aria-controls="navigation"
             aria-expanded="false"
             aria-label="Toggle navigation"

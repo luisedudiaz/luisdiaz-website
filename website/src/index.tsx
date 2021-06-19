@@ -1,14 +1,14 @@
 import ReactDOM from "react-dom";
-import Routes from "./router";
+import Router from "./router";
 import reportWebVitals from "./reportWebVitals";
 import Providers from "./providers";
 import "bootstrap";
-import "./styles/index.scss";
 import 'react-toastify/dist/ReactToastify.css';
+import "./styles/index.scss";
 
 ReactDOM.render(
   <Providers>
-    <Routes />
+    <Router />
   </Providers>,
   document.getElementById("root")
 );

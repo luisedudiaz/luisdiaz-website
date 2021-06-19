@@ -1,14 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Helmet } from "react-helmet";
-
-type Meta = JSX.IntrinsicElements["meta"];
-
-interface SeoProps {
-  title?: string;
-  description?: string;
-  lang?: string;
-  meta?: Meta[] | undefined;
-}
+import { Meta, SeoProps } from "../../../types";
 
 const SEO : FC<SeoProps> = ({
   title = "Not Found",
