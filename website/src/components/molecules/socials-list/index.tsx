@@ -1,35 +1,19 @@
-import React, { FC } from "react";
-import SocialListElement, {
-  ISocialList,
-} from "../../atoms/social-list-element";
+import React, { FC, PropsWithChildren } from "react";
+import { PropsSocialList } from "../../../types/social.types";
+import SocialListElement from "../../atoms/social-list-element";
 
-const socialMedias: Array<ISocialList> = [
-  {
-    icon: "github-alt",
-    prefix: "fab",
-    href: "https://github.com/luisedudiaz",
-  },
-  {
-    icon: "stack-overflow",
-    prefix: "fab",
-    href: "https://stackoverflow.com/users/13654760/luis-eduardo-d%c3%adaz",
-  },
-  {
-    icon: "linkedin-in",
-    prefix: "fab",
-    href: "https://linkedin.com/in/luisedudiaz"
-  }
-];
-
-const SocialsList: FC = () => {
+const SocialsList: FC<PropsSocialList> = ({
+  socials,
+}: PropsWithChildren<PropsSocialList>) => {
   return (
     <>
-      {socialMedias.map((socialMedia, i) => (
+      {socials.map((social, i) => (
         <SocialListElement
           key={i}
-          href={socialMedia.href}
-          icon={socialMedia.icon}
-          prefix={socialMedia.prefix}
+          href={social.href}
+          icon={social.icon}
+          prefix={social.prefix}
+          name={social.name}
         />
       ))}
     </>

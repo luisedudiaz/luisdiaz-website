@@ -1,22 +1,74 @@
-import { faAdjust, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import TextareaAutosize from "react-textarea-autosize";
+import {
+  faAdjust,
+  faSignOutAlt,
+  faCheck,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useContext, useState } from "react";
 import { Helmet } from "react-helmet";
-
 import { Link, useHistory } from "react-router-dom";
 import { context } from "../../../providers";
 import PagesList from "../../molecules/pages-list";
 import SocialsList from "../../molecules/socials-list";
+import { useEffect } from "react";
+import { firestore } from "../../../utils/firebase.utils";
+import { Roles } from "../../../types";
+import { User, Header as IHeader } from "../../../types/user.types";
+import { Social } from "../../../types/social.types";
+import AddSocialMedia from "../../molecules/modals/add-social-media";
+import Login from "../../molecules/modals/login";
 
 const Header: FC = () => {
   const isChecked = JSON.parse(sessionStorage.getItem("dark-mode")!);
-  const { isLoggedIn, logoutWithRedirect } = useContext(context.auth);
+  const { isLoggedIn, roles, user, logoutWithRedirect } = useContext(
+    context.auth
+  );
+  const [socialMedia, setSocialMedia] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [checked, setChecked] = useState(isChecked);
+  const [bioStatus, setBioStatus] = useState(false);
+  const [header, setHeader] = useState<IHeader>();
+  const [socials, setSocials] = useState<Social[]>([]);
   const history = useHistory();
+  const uid = process.env.REACT_APP_UID!;
+
+  useEffect(() => {
+    getHeaderInfo(uid);
+  }, [uid]);
 
   const handleChangeDarkMode = () => {
     sessionStorage.setItem("dark-mode", JSON.stringify(!checked));
     setChecked(!checked);
+  };
+
+  const getHeaderInfo = async (uid: string) => {
+    firestore()
+      .collection("users")
+      .doc(uid)
+      .onSnapshot((snapshot) => {
+        const user = snapshot.data() as User;
+        setHeader(user.header);
+        setSocials(user.socials);
+      });
+  };
+
+  const cancelBio = async () => {
+    await getHeaderInfo(user?.uid!);
+    setBioStatus(false);
+  };
+
+  const saveBio = async () => {
+    await firestore()
+      .collection("users")
+      .doc(user?.uid)
+      .update({
+        header: {
+          bio: header?.bio,
+        },
+      });
+    setBioStatus(false);
   };
 
   return (
@@ -51,12 +103,60 @@ const Header: FC = () => {
           <div id="navigation" className="collapse navbar-collapse flex-column">
             <div className="profile-section pt-3 pt-lg-0">
               {/*<Image name="profile" />*/}
-              <div className="bio mb-3">
-                Hi, my name is Luis Díaz and I'm a software engineer. Welcome to
-                my personal website!
+              <div
+                className="bio mb-3"
+                onClick={() =>
+                  isLoggedIn &&
+                  roles.includes(Roles.ADMIN) &&
+                  setBioStatus(true)
+                }
+              >
+                {bioStatus ? (
+                  <div className="d-flex flex-column align-items-end">
+                    <TextareaAutosize
+                      className="profile-textarea w-100"
+                      minRows={7}
+                      cacheMeasurements
+                      value={header?.bio}
+                      onChange={(e) =>
+                        setHeader({ ...header, bio: e.target.value })
+                      }
+                    />
+
+                    <div className="mt-1">
+                      <button
+                        type="button"
+                        className="btn btn-secondary btn-sm me-1"
+                        onClick={cancelBio}
+                      >
+                        <FontAwesomeIcon icon={faTimes} fixedWidth />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-primary btn-sm"
+                        onClick={() => saveBio()}
+                      >
+                        <FontAwesomeIcon icon={faCheck} fixedWidth />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p>{header?.bio}</p>
+                )}
               </div>
+
               <ul className="social-list list-inline py-2 mx-auto">
-                <SocialsList />
+                <SocialsList socials={socials} />
+                {isLoggedIn && roles.includes(Roles.ADMIN) && (
+                  <li className="list-inline-item">
+                    <button onClick={() => setSocialMedia(true)}>
+                      <FontAwesomeIcon
+                        className="fa-fw"
+                        icon={["fas", "plus"]}
+                      />
+                    </button>
+                  </li>
+                )}
               </ul>
               <hr />
             </div>
@@ -68,14 +168,12 @@ const Header: FC = () => {
               <a className="btn btn-primary" href="contact.html" target="_blank">
               <i className="fas fa-paper-plane me-2"/>Hire Me</a>
             </div> */}
-
             {!isLoggedIn && (
               <div className="my-2">
                 <button
                   type="button"
                   className="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#login"
+                  onClick={() => setShowLogin(true)}
                 >
                   Login
                 </button>
@@ -100,6 +198,15 @@ const Header: FC = () => {
           </div>
         </nav>
       </div>
+      {isLoggedIn && roles.includes(Roles.ADMIN) && (
+        <AddSocialMedia
+          show={socialMedia}
+          setShow={setSocialMedia.bind(this)}
+        />
+      )}
+      {!isLoggedIn && (
+        <Login show={showLogin} setShow={setShowLogin.bind(this)} />
+      )}
     </header>
   );
 };
