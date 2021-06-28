@@ -42,9 +42,9 @@ const AuthProvider: FC = (props) => {
 
   const logout = async () => {
     try {
+      setIsLoggedIn(false);
       await auth().signOut();
       setUser(null);
-      setIsLoggedIn(false);
       setRoles([]);
     } catch (error) {
       console.log(error);
@@ -53,7 +53,6 @@ const AuthProvider: FC = (props) => {
 
   const logoutWithRedirect = async (history: any) => {
     try {
-      console.log(history);
       history.push("/")
       await logout();
     } catch (error) {

@@ -9,3 +9,8 @@ export type AuthContext = {
   logout?: () => void;
   logoutWithRedirect?: (history: any) => void
 }
+
+export type Login = {
+  email: string;
+  password: string;
+};
