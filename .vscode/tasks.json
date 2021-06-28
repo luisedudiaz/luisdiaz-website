@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "npm",
+      "script": "serve",
+      "path": "functions/",
+      "problemMatcher": [],
+      "label": "npm: serve - functions",
+      "detail": "npm run watch | firebase emulators:start --import=./database --export-on-exit"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "website/",
+      "problemMatcher": [],
+      "label": "npm: start - website",
+      "detail": "react-scripts start"
+    }
+  ]
+}
