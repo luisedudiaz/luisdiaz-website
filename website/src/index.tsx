@@ -6,7 +6,6 @@ import "bootstrap";
 import 'react-toastify/dist/ReactToastify.css';
 import "./styles/index.scss";
 import "rsuite/dist/styles/rsuite-default.css";
-import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <Providers>

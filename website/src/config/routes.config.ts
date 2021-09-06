@@ -1,17 +1,6 @@
 import { intersection } from "lodash";
 import { Roles, Link } from "../types";
 
-// const routes: Route[] = [
-//   {
-//     component: Dashboard,
-//     path: "/",
-//     title: "Dashboard",
-//     exact: true,
-//     permission: [
-//       Roles.ADMIN
-//     ],
-//   }
-// ]
 
 export const isArrayWithLength = (arr: Roles[]) => {
   return Array.isArray(arr) && arr.length;

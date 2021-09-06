@@ -17,7 +17,7 @@ const Routes: FC = () => {
       <Layout>
         <Suspense fallback={<Loading />}>
           <Switch>
-            {getAllowedRoutes([...roles, "GUEST"] as Roles[], links).map(
+            {getAllowedRoutes([...roles, Roles.GUEST] as Roles[], links).map(
               (route) => {
                 return (
                   <Route
