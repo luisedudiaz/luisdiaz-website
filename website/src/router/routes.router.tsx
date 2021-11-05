@@ -1,7 +1,7 @@
 import React, { FC, Fragment, Suspense, useContext } from "react";
 import { Route, Switch } from "react-router";
 import { context } from "../providers";
-import { getAllowedRoutes } from "../config/routes.config";
+import { getAllowedRoutes } from "../utils/routes.utils";
 import { Roles } from "../types";
 import Layout from "../components/templates/layouts/default";
 import Loading from "../components/organisms/loading";

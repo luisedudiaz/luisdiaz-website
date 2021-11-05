@@ -2,10 +2,11 @@ import ReactDOM from "react-dom";
 import Router from "./router";
 import reportWebVitals from "./reportWebVitals";
 import Providers from "./providers";
+import "./config/firebase.config"
 import "bootstrap";
 import 'react-toastify/dist/ReactToastify.css';
+import "rsuite/dist/rsuite.css";
 import "./styles/index.scss";
-import "rsuite/dist/styles/rsuite-default.css";
 
 ReactDOM.render(
   <Providers>

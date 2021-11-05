@@ -1,19 +1,16 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useRef } from "react";
 import { context } from "../../../providers";
 import {
   Button,
-  ControlLabel,
   Form,
-  FormGroup,
   Modal,
   Schema,
-  FormControl,
   ButtonToolbar,
-  FormProps,
 } from "rsuite";
 import { ModalProps } from "../../../types/modal.types";
 import { useState } from "react";
 import { Login as ILogin } from "../../../types";
+import { FormInstance } from "rsuite/Form";
 
 const { StringType } = Schema.Types;
 
@@ -26,17 +23,15 @@ const model = Schema.Model({
 
 const Login: FC<ModalProps> = ({ show, setShow }) => {
   const { login } = useContext(context.auth);
-  const [form, setForm] = useState<FormProps>();
-  const [formValue, setFormValue] = useState<ILogin>({
-    email: "",
-    password: "",
-  });
+  const form = useRef<FormInstance>(null)
+  const [formValue, setFormValue] = useState({});
 
   const [, setFormError] = useState({});
 
   const handleSubmit = async () => {
-    if (form?.check()) {
-      await login!(formValue.email!, formValue.password!);
+    if (form.current?.check!()) {
+      const values = formValue as ILogin
+      await login!(values.email, values.password);
       close();
     }
   };
@@ -46,12 +41,12 @@ const Login: FC<ModalProps> = ({ show, setShow }) => {
   };
 
   return (
-    <Modal overflow backdrop show={show} onHide={close}>
+    <Modal overflow backdrop open={show} onClose={close}>
       <Form
         fluid
-        ref={(ref: FormProps) => setForm(ref)}
-        onChange={(formValue: any) => setFormValue(formValue)}
-        onCheck={(formError) => setFormError(formError)}
+        ref={form}
+        onChange={setFormValue}
+        onCheck={setFormError}
         formValue={formValue}
         model={model}
       >
@@ -59,14 +54,14 @@ const Login: FC<ModalProps> = ({ show, setShow }) => {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body className="mb-5">
-          <FormGroup>
-            <ControlLabel>Email</ControlLabel>
-            <FormControl name="email" />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password</ControlLabel>
-            <FormControl name="password" type="password" autoComplete="on" />
-          </FormGroup>
+          <Form.Group>
+            <Form.ControlLabel>Email</Form.ControlLabel>
+            <Form.Control name="email" />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Password</Form.ControlLabel>
+            <Form.Control name="password" />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <ButtonToolbar>

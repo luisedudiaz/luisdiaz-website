@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -7,7 +7,7 @@ import { Social } from "../../../types/social.types";
 import { useContext } from "react";
 import { context } from "../../../providers";
 import { Roles } from "../../../types";
-import { firestore } from "../../../utils/firebase.utils";
+import { getFirestore, doc, updateDoc, arrayRemove } from "firebase/firestore";
 
 library.add(fab);
 library.add(fas);
@@ -21,8 +21,9 @@ const SocialListElement: FC<Social> = ({
   const { isLoggedIn, roles } = useContext(context.auth);
 
   const deleteSocial = async () => {
-    await firestore().collection("users").doc(process.env.REACT_APP_UID).update({
-      socials: firestore.FieldValue.arrayRemove({
+    const uid = process.env.REACT_APP_UID as string
+    await updateDoc(doc(getFirestore(), "users", uid), {
+      socials: arrayRemove({
         href,
         icon,
         prefix,

@@ -13,12 +13,12 @@ import { context } from "../../../providers";
 import PagesList from "../../molecules/pages-list";
 import SocialsList from "../../molecules/socials-list";
 import { useEffect } from "react";
-import { firestore } from "../../../utils/firebase.utils";
 import { Roles } from "../../../types";
 import { User, Header as IHeader } from "../../../types/user.types";
 import { Social } from "../../../types/social.types";
 import AddSocialMedia from "../../molecules/modals/add-social-media";
 import Login from "../../molecules/modals/login";
+import { doc, getFirestore, onSnapshot, updateDoc } from "@firebase/firestore";
 
 const Header: FC = () => {
   const isChecked = JSON.parse(sessionStorage.getItem("dark-mode")!);
@@ -44,14 +44,11 @@ const Header: FC = () => {
   };
 
   const getHeaderInfo = async (uid: string) => {
-    firestore()
-      .collection("users")
-      .doc(uid)
-      .onSnapshot((snapshot) => {
-        const user = snapshot.data() as User;
-        setHeader(user.header);
-        setSocials(user.socials);
-      });
+    onSnapshot(doc(getFirestore(), "users", uid), snapshot => {
+      const user = snapshot.data() as User;
+      setHeader(user.header);
+      setSocials(user.socials);
+    })
   };
 
   const cancelBio = async () => {
@@ -60,14 +57,11 @@ const Header: FC = () => {
   };
 
   const saveBio = async () => {
-    await firestore()
-      .collection("users")
-      .doc(user?.uid)
-      .update({
-        header: {
-          bio: header?.bio,
-        },
-      });
+    await updateDoc(doc(getFirestore(), "users", user?.uid!), {
+      header: {
+        bio: header?.bio,
+      },
+    })
     setBioStatus(false);
   };
 

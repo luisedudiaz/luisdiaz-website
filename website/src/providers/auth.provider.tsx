@@ -1,5 +1,5 @@
 import { createContext, FC, useEffect, useState } from "react";
-import firebase, { auth } from "../utils/firebase.utils";
+import { getAuth, User, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { AuthContext as IAuthContext } from "../types/auth.types";
 import { Roles } from "../types";
@@ -11,7 +11,7 @@ export const AuthContext = createContext<IAuthContext>({
 });
 
 const AuthProvider: FC = (props) => {
-  const [user, setUser] = useState<null | firebase.User>(null);
+  const [user, setUser] = useState<null | User>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(!!user);
   const [roles, setRoles] = useState<Roles[]>([]);
 
@@ -24,9 +24,9 @@ const AuthProvider: FC = (props) => {
   }, []);
 
   const onAuthStateChange = () => {
-    return auth().onAuthStateChanged(async (user) => {
-      const result = await auth().currentUser?.getIdTokenResult();
-      const userRoles: Roles[] = result?.claims.roles;
+    return onAuthStateChanged(getAuth(), async (user) => {
+      const result = await getAuth().currentUser?.getIdTokenResult();
+      const userRoles = result?.claims.roles as Roles[];
       if (userRoles) {
         setUser(user);
         setIsLoggedIn(!!user);
@@ -43,7 +43,7 @@ const AuthProvider: FC = (props) => {
   const logout = async () => {
     try {
       setIsLoggedIn(false);
-      await auth().signOut();
+      await signOut(getAuth());
       setUser(null);
       setRoles([]);
     } catch (error) {
@@ -62,14 +62,14 @@ const AuthProvider: FC = (props) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const user = (await auth().signInWithEmailAndPassword(email, password))
+      const user = (await signInWithEmailAndPassword(getAuth(), email, password))
         .user;
-      const result = await auth().currentUser?.getIdTokenResult();
-      const userRoles: Roles[] = result?.claims.roles;
+      const result = await getAuth().currentUser?.getIdTokenResult();
+      const userRoles = result?.claims.roles as Roles[];
       if (userRoles) {
         setUser(user);
         setIsLoggedIn(!!user);
-        setRoles(result?.claims.roles);
+        setRoles(roles);
         toast.success(`Welcome, ${user?.displayName}`);
       } else {
         logout!();
@@ -79,7 +79,11 @@ const AuthProvider: FC = (props) => {
         toast.warn("Contact your administrator.");
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        console.log(error)
+      }
     }
   };
 

@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
-import { firestore } from "../utils/firebase.utils";
+import { getFirestore, where, collection, onSnapshot, query } from "firebase/firestore";
 import { Link, LinksContext as ILinksContext } from "../types";
 import { AuthContext } from "./auth.provider";
 
@@ -16,22 +16,22 @@ const LinksProvider: FC = (props) => {
   useEffect(() => {
     async function getLinks() {
       try {
-        firestore()
-          .collection("links")
-          .where("permissions", "array-contains-any", [...roles, "GUEST"])
-          .where("active", "==", true)
-          .onSnapshot(
-            (snapshot) => {
-              setLoading(true);
-              setLinks(snapshot.docs.map((e) => e.data()) as Link[]);
-              setLoading(false);
-            },
-            (error) => {
-              setLoading(false);
-            }
-          );
-      } catch (e) {
-        console.log(e.message);
+        const linksRef = collection(getFirestore(), "links")
+        const linksQueryPermissions = query(linksRef, where("permissions", "array-contains-any", [...roles, "GUEST"]), where("active", "==", true))
+        onSnapshot(linksQueryPermissions, (snapshot) => {
+          setLoading(true);
+          setLinks(snapshot.docs.map((e) => e.data()) as Link[]);
+          setLoading(false);
+        }, (error) => {
+          console.log(error)
+          setLoading(false);
+        })
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else {
+          console.log(error)
+        }
       }
     }
     getLinks();

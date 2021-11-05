@@ -1,6 +1,5 @@
 # Compiled JavaScript files
-lib/**/*.js
-lib/**/*.js.map
+lib/
 
 database/
 
@@ -9,3 +8,6 @@ typings/
 
 # Node.js dependency directory
 node_modules/
+
+# firebase export
+firebase-export-*/

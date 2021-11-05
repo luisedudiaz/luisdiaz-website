@@ -1,8 +1,8 @@
-import firebase from "../utils/firebase.utils";
+import { User } from "@firebase/auth";
 import { Roles } from "./roles.types";
 
 export type AuthContext = {
-  user: null | firebase.User;
+  user: null | User;
   isLoggedIn: boolean;
   roles: Roles[];
   login?: (email: string, password: string) => Promise<void>;

@@ -1,22 +1,18 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useState, useRef } from "react";
 import * as Icons from "@fortawesome/free-brands-svg-icons";
 import {
   Button,
   Modal,
   InputPicker,
   Schema,
-  FormProps,
-  FormGroup,
-  ControlLabel,
-  Form,
-  FormControl,
+  Form
 } from "rsuite";
 import { ModalProps } from "../../../types/modal.types";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { Social } from "../../../types/social.types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ItemDataType } from "rsuite/lib/@types/common";
-import { firestore } from "../../../utils/firebase.utils";
+import { updateDoc, doc, getFirestore, arrayUnion } from "@firebase/firestore";
+import { FormInstance } from "rsuite/Form";
 
 library.add(Icons.fab);
 
@@ -29,25 +25,24 @@ const model = Schema.Model({
 });
 
 const AddSocialMedia: FC<ModalProps> = ({ show, setShow }) => {
+  const form = useRef<FormInstance>(null)
   const [icons, setIcons] = useState<
     { label: Icons.IconName; value: Icons.IconName }[]
   >([]);
-  const [form, setForm] = useState<FormProps>();
-  const [formValue, setFormValue] = useState<Social>({
-    name: "",
-    href: "",
-  });
+  const [formValue, setFormValue] = useState({});
 
   const [, setFormError] = useState({});
 
   const handleSubmit = async () => {
-    if (form?.check()) {
+    if (form.current?.check!()) {
       close();
-      await firestore().collection("users").doc(process.env.REACT_APP_UID).update({
-        socials: firestore.FieldValue.arrayUnion({
-          name: formValue.name,
-          href: formValue.href,
-          icon: formValue.icon,
+      const uid = process.env.REACT_APP_UID as string
+      const values = formValue as Social
+      updateDoc(doc(getFirestore(), "users", uid), {
+        socials: arrayUnion({
+          name: values.name,
+          href: values.href,
+          icon: values.icon,
           prefix: "fab"
         })
       })
@@ -59,6 +54,7 @@ const AddSocialMedia: FC<ModalProps> = ({ show, setShow }) => {
     setFormValue({
       name: "",
       href: "",
+      icon: ""
     })
   };
 
@@ -74,12 +70,12 @@ const AddSocialMedia: FC<ModalProps> = ({ show, setShow }) => {
   }, []);
 
   return (
-    <Modal show={show} onHide={close}>
+    <Modal open={show} onOpen={close}>
       <Form
         fluid
-        ref={(ref: FormProps) => setForm(ref)}
-        onChange={(formValue: any) => setFormValue(formValue)}
-        onCheck={(formError) => setFormError(formError)}
+        ref={form}
+        onChange={setFormValue}
+        onCheck={setFormError}
         formValue={formValue}
         model={model}
       >
@@ -87,13 +83,13 @@ const AddSocialMedia: FC<ModalProps> = ({ show, setShow }) => {
           <Modal.Title>Add social</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormGroup>
-            <ControlLabel>Icon</ControlLabel>
-            <FormControl
+          <Form.Group>
+            <Form.ControlLabel>Icon</Form.ControlLabel>
+            <Form.Control
               name="icon"
               block
-              accepter={InputPicker}
-              renderMenuItem={(label: ReactNode, item: ItemDataType) => {
+              as={InputPicker}
+              renderMenuItem={(label: ReactNode, item: { label: Icons.IconName; }) => {
                 return (
                   <div>
                     <FontAwesomeIcon icon={["fab", item.label]} /> {label}
@@ -102,15 +98,15 @@ const AddSocialMedia: FC<ModalProps> = ({ show, setShow }) => {
               }}
               data={icons}
             />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Url</ControlLabel>
-            <FormControl name="href" />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Name</ControlLabel>
-            <FormControl name="name" />
-          </FormGroup>
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Url</Form.ControlLabel>
+            <Form.Control name="href" />
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Name</Form.ControlLabel>
+            <Form.Control name="name" />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleSubmit} appearance="primary">
