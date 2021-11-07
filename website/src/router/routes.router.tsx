@@ -3,8 +3,8 @@ import { Route, Switch } from "react-router";
 import { context } from "../providers";
 import { getAllowedRoutes } from "../utils/routes.utils";
 import { Roles } from "../types";
-import Layout from "../components/templates/layouts/default";
-import Loading from "../components/organisms/loading";
+import Layout from "../components/layouts/landing";
+import Loading from "../components/utils/loading";
 import NotFoundPage from "../pages/404";
 
 const Routes: FC = () => {

@@ -1,2 +1,2 @@
-import Dashboard from "../components/templates/dashboard/default";
+import Dashboard from "../components/dashboard";
 export default Dashboard

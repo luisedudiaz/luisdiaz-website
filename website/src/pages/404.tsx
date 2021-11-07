@@ -1,7 +1,6 @@
-import React, { FC } from "react"
-
-import SEO from "../components/organisms/seo"
+import { FC } from "react"
 import { Link } from "react-router-dom"
+import SEO from "../components/utils/seo"
 
 const NotFoundPage: FC = () => (
   <>
