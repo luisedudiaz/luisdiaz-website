@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Home from "../components/home"
-import "../components/home/index.scss";
+// import "../components/home/index.scss";
 
 const { About, Blog, Featured, Overview, Seo, Testimonials } = Home
 

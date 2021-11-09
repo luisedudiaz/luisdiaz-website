@@ -1,6 +1,6 @@
 import { createContext, FC, useEffect, useState } from "react";
 import { getAuth, User, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { AuthContext as IAuthContext } from "../types/auth.types";
 import { Roles } from "../types";
 
@@ -70,17 +70,17 @@ const AuthProvider: FC = (props) => {
         setUser(user);
         setIsLoggedIn(!!user);
         setRoles(roles);
-        toast.success(`Welcome, ${user?.displayName}`);
+        // toast.success(`Welcome, ${user?.displayName}`);
       } else {
         logout!();
         setUser(null);
         setIsLoggedIn(false);
         setRoles([]);
-        toast.warn("Contact your administrator.");
+        // toast.warn("Contact your administrator.");
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
+        // toast.error(error.message);
       } else {
         console.log(error)
       }

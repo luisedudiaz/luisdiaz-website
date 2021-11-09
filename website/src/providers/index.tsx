@@ -1,6 +1,10 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { FC } from "react";
+import { Provider as ReduxProvider } from "react-redux";
 import AuthProvider, { AuthContext } from "./auth.provider";
 import LinksProvider, { LinksContext } from "./links.provider";
+import { theme } from "../styles/theme";
+import { store } from "../store";
 
 export const context = {
   auth: AuthContext,
@@ -9,9 +13,14 @@ export const context = {
 
 const Providers: FC = (props) => {
   return (
-    <AuthProvider>
-      <LinksProvider>{props.children}</LinksProvider>
-    </AuthProvider>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AuthProvider>
+          <LinksProvider>{props.children}</LinksProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </ReduxProvider>
   );
 };
 
