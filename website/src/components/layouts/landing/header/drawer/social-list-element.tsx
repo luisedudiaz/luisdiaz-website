@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 // import { fas } from "@fortawesome/free-solid-svg-icons";
-import { Social } from "../../../../types/social.types";
+import { Social } from "../../../../../types/social.types";
 // import { useContext } from "react";
 // import { context } from "../../../../providers";
 // import { Roles } from "../../../../types";

@@ -7,8 +7,8 @@ import { doc, getFirestore, onSnapshot } from "@firebase/firestore";
 import { User, Header } from "../../../../../types/user.types";
 import { Social } from "../../../../../types/social.types";
 
-import SocialsList from "../socials-list";
-import PagesList from "../pages-list";
+import SocialsList from "./socials-list";
+import PagesList from "./pages-list";
 
 const DrawerBody = styled('div')(({ theme }) => ({
     color: common.white,
