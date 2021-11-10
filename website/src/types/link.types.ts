@@ -7,14 +7,14 @@ export type Link = {
   path: string,
   permissions: Roles[],
   active: boolean,
-} & PageList
+} & PageListProps
 
 export type LinksContext = {
   links: Link[],
   loading: boolean
 }
 
-export type PageList = {
+export type PageListProps = {
   name: string;
   path: string;
   icon: IconName;

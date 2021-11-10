@@ -1,3 +1,4 @@
+import { List } from "@mui/material";
 import { FC, useContext } from "react";
 import { context } from "../../../../providers";
 import PageListElement from "./page-list-element";
@@ -45,7 +46,7 @@ const PagesList: FC = () => {
   const { links } = useContext(context.links);
 
   return (
-    <>
+    <List>
       {links.map((link, i) => (
         <PageListElement
           key={i}
@@ -55,7 +56,7 @@ const PagesList: FC = () => {
           prefix={link.prefix}
         />
       ))}
-    </>
+    </List>
   );
 };
 

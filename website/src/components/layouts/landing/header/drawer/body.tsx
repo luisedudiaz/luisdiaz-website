@@ -8,6 +8,7 @@ import { User, Header } from "../../../../../types/user.types";
 import { Social } from "../../../../../types/social.types";
 
 import SocialsList from "../socials-list";
+import PagesList from "../pages-list";
 
 const DrawerBody = styled('div')(({ theme }) => ({
     color: common.white,
@@ -66,28 +67,10 @@ const Body: FC = () => {
         <Toolbar className="blog-socials">
             <SocialsList socials={socials} />
         </Toolbar>
-        <Divider />
-        {/* <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List> */}
+        <Divider sx={{ my: 2 }} />
+        <Toolbar>
+            <PagesList />
+        </Toolbar>
     </DrawerBody>
 }
 
