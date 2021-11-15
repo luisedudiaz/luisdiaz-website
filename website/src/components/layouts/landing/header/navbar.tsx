@@ -12,7 +12,7 @@ const Navbar: FC = () => {
     const { open } = bindActionCreators(DrawerCreators, dispatch)
 
     return <AppBar
-        position="fixed"
+        position="relative"
         sx={{
             width: { lg: `calc(100% - ${DRAWER_WIDTH}px)` },
             ml: { lg: `${DRAWER_WIDTH}px` },

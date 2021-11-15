@@ -1,3 +1,4 @@
+import { common } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 
 export const theme = createTheme({
@@ -10,7 +11,8 @@ export const theme = createTheme({
             secondary: "#a9a9a9"
         },
         background: {
-            default: "#fafafa",
+            default: common.white,
+            paper: "#fafafa",
         },
         error: {
             main: "#d9603c"

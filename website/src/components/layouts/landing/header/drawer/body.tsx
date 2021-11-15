@@ -67,7 +67,7 @@ const Body: FC = () => {
         <Toolbar className="blog-socials">
             <SocialsList socials={socials} />
         </Toolbar>
-        <Divider sx={{ my: 2 }} />
+        <Divider sx={{ m: 2, }} />
         <Toolbar>
             <PagesList />
         </Toolbar>

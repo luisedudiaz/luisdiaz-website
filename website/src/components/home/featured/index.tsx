@@ -1,15 +1,27 @@
+import { Grid, Divider, Typography } from '@mui/material'
 import { FC } from 'react'
 import ProjectCards from './project-cards'
 
 const Featured: FC = () => (
-    <section className="featured-section p-3 p-lg-5">
-        <div className="container">
-            <h2 className="section-title font-weight-bold mb-5">
-                Featured Projects
-            </h2>
+    <Grid pt={6} container component="section" sx={{
+        p: {
+            xs: 4,
+            md: 8
+        }
+    }}>
+        <Grid container item mb={3}>
+            <Divider orientation="vertical" variant="fullWidth" flexItem sx={{
+                background: theme => theme.palette.primary.main,
+                width: 5
+            }} />
+            <Grid ml={2} item>
+                <Typography fontSize="2rem" fontWeight="bold" variant="h2" component="h2" className="section-title font-weight-bold mb-3">Featured Projects</Typography>
+            </Grid>
+        </Grid>
+        <Grid container item justifyContent="center">
             <ProjectCards />
-        </div>
-    </section>
+        </Grid>
+    </Grid>
 )
 
 export default Featured

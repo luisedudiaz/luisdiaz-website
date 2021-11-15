@@ -6,52 +6,79 @@ import {
     faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
+import { common } from "@mui/material/colors";
+
 const About: FC = () => {
     return (
-        <section className="about-me-section p-3 p-lg-5 theme-bg-light">
-            <div className="container">
-                <div className="profile-teaser media flex-column flex-lg-row">
-                    <div className="media-body">
-                        <h2 className="name font-weight-bold mb-1">Luis Díaz</h2>
-                        <div className="tagline mb-3">Software Engineer</div>
-                        <div className="bio mb-4">
-                            I'm a software engineer specialised in frontend and backend
-                            development for complex scalable web apps.
-                            {/* I write about software development on <Link to="/blog">my blog</Link>.  */}{" "}
-                            Want to know how I may help your project? Check out my
-                            {/* project{" "}
+        <Grid pt={6} container component="section" sx={{
+            background: theme => theme.palette.background.paper,
+            p: {
+                xs: 4,
+                md: 8
+            }
+        }}>
+            <Grid item xs>
+                <div className="media-body">
+                    <Typography variant="h3" component="h3" fontWeight="bold" mb={1}>Luis Díaz</Typography>
+                    <Typography mb={3} variant="h5" component="div" fontWeight={theme => theme.typography.fontWeightLight}>Software Engineer</Typography>
+                    <Box mb={3}>
+                        I'm a software engineer specialised in frontend and backend
+                        development for complex scalable web apps.
+                        {/* I write about software development on <Link to="/blog">my blog</Link>.  */}{" "}
+                        Want to know how I may help your project? Check out my
+                        {/* project{" "}
               <Link to="/portfolio">portfolio</Link> and */}
-                            {" "}
-                            <a
-                                href="Luis_Diaz_Software_Engineer.pdf"
-                                target="_blank"
-                            >
-                                online resume
-                            </a>
-                            .
-                        </div>
-                        <div className="mb-4">
-                            {/* <Link to="/portfolio" className="btn btn-primary me-2 mb-3">
+                        {" "}
+                        <Link
+                            href="Luis_Diaz_Software_Engineer.pdf"
+                            target="_blank"
+                        >
+                            online resume
+                        </Link>
+                        .
+                    </Box>
+                    <Box>
+                        {/* <Link to="/portfolio" className="btn btn-primary me-2 mb-3">
                 <FontAwesomeIcon
                   icon={faArrowAltCircleRight}
                   className="me-2"
                 />
                 <span className="d-none d-md-inline">View</span> Portfolio
               </Link> */}
-                            <a
-                                href="Luis_Diaz_Software_Engineer.pdf"
-                                target="_blank"
-                                className="btn btn-secondary mb-3"
-                            >
-                                <FontAwesomeIcon icon={faFileAlt} className="me-2" />
-                                <span className="d-none d-md-inline">View</span> Resume
-                            </a>
-                        </div>
-                    </div>
-                    {/*<Image name="profile-lg" />*/}
+                        <Button
+                            variant="contained"
+                            href="Luis_Diaz_Software_Engineer.pdf"
+                            target="_blank"
+                            sx={{
+                                mb: 3,
+                                color: common.white,
+                                fontWeight: "bold",
+                                textTransform: 'none',
+                            }}
+                        >
+                            <Typography component="span" noWrap >
+                                <FontAwesomeIcon icon={faFileAlt} />
+                            </Typography>
+                            <Typography ml={0.5} fontWeight="bold" component="span" sx={{
+                                display: {
+                                    xs: "none",
+                                    lg: "block"
+                                }
+                            }} noWrap>View</Typography>
+                            <Typography ml={0.5} fontWeight="bold" component="span" noWrap>
+                                Resume
+                            </Typography>
+                        </Button>
+                    </Box>
                 </div>
-            </div>
-        </section>
+
+            </Grid>
+            <Grid item xs={12} lg={5}>
+
+                {/*<Image name="profile-lg" />*/}
+            </Grid>
+        </Grid >
     );
 };
 
