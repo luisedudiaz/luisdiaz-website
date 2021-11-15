@@ -1,10 +1,11 @@
-import { FC, PropsWithChildren, ReactNode } from "react";
+import { FC } from "react"
+import { Outlet } from "react-router"
 import { Box } from "@mui/material"
 import { DRAWER_WIDTH } from "../../../utils/constants.utils";
 import Footer from "./footer";
 import Header from "./header";
 
-const Layout: FC = ({ children }: PropsWithChildren<ReactNode>) => {
+const Layout: FC = () => {
   return (
     <>
       <Header />
@@ -20,7 +21,7 @@ const Layout: FC = ({ children }: PropsWithChildren<ReactNode>) => {
           }
         }}
       >
-        {children}
+        <Outlet />
         <Footer />
       </Box>
     </>

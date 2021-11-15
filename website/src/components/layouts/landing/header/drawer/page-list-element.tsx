@@ -39,7 +39,7 @@ const PageListElement: FC<PageListProps> = ({
 }: PropsWithChildren<PageListProps>) => {
   return (
     <PageList>
-      <NavLink exact to={path} activeClassName="active">
+      <NavLink to={path} className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}>
         <ListItem sx={{ px: 0, py: 0.5 }}>
           <ListItemIcon sx={{ justifyContent: "flex-end", mr: "0.75rem" }}>
             <FontAwesomeIcon icon={[prefix, icon]} />

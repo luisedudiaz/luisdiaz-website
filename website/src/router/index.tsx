@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes.router";
+
 // import { toast } from 'react-toastify';
 
 // toast.configure({
@@ -10,11 +11,7 @@ import Routes from "./routes.router";
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="">
-          <Routes />
-        </Route>
-      </Switch>
+      <Routes />
     </BrowserRouter>
   );
 };
