@@ -1,12 +1,9 @@
 import ReactDOM from "react-dom";
-import Router from "./router";
 import reportWebVitals from "./reportWebVitals";
+import Router from "./router";
 import Providers from "./providers";
 import "./config/firebase.config"
-import "bootstrap";
-import 'react-toastify/dist/ReactToastify.css';
-import "rsuite/dist/rsuite.css";
-import "./styles/index.scss";
+import "./styles/index.css"
 
 ReactDOM.render(
   <Providers>

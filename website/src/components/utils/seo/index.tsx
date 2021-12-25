@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Helmet } from "react-helmet";
-import { Meta, SeoProps } from "../../../types";
+import { Meta, SeoProps } from "types";
 
 const SEO: FC<SeoProps> = ({
   title = "Not Found",

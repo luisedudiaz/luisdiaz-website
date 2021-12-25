@@ -1,12 +1,17 @@
-import React, { FC, PropsWithChildren } from "react";
-import { PropsSocialList } from "../../../../types/social.types";
+import { FC, PropsWithChildren } from "react";
+import { styled } from "@mui/material/styles"
+import { PropsSocialList } from "types/social.types";
 import SocialListElement from "./social-list-element";
+
+const SocialElement = styled("div")(() => ({
+  margin: "auto"
+}))
 
 const SocialsList: FC<PropsSocialList> = ({
   socials,
 }: PropsWithChildren<PropsSocialList>) => {
   return (
-    <>
+    <SocialElement>
       {socials.map((social, i) => (
         <SocialListElement
           key={i}
@@ -16,7 +21,7 @@ const SocialsList: FC<PropsSocialList> = ({
           name={social.name}
         />
       ))}
-    </>
+    </SocialElement>
   );
 };
 

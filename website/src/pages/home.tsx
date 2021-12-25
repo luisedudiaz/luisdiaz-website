@@ -1,28 +1,22 @@
+import { Container, Divider, Stack } from "@mui/material";
 import { FC } from "react";
-import Home from "../components/home"
-import "../components/home/index.scss";
-
-const { About, Blog, Featured, Overview, Seo, Testimonials } = Home
+import { About, Blog, Featured, Overview, Seo, Testimonials } from "components/home"
 
 const HomePage: FC = () => {
     return (
-        <div>
-            <Seo />
-            <About />
-            <Overview />
-            <div className="container">
-                <hr />
-            </div>
-            <Testimonials />
-            <div className="container">
-                <hr />
-            </div>
-            <Featured />
-            <div className="container">
-                <hr />
-            </div>
-            <Blog />
-        </div>
+        <Container maxWidth={false} disableGutters>
+            <Stack direction="column">
+                <Seo />
+                <About />
+                <Overview />
+                <Divider flexItem sx={{ mx: 4 }} />
+                <Testimonials />
+                <Divider flexItem sx={{ mx: 4 }} />
+                <Featured />
+                <Divider flexItem sx={{ mx: 4 }} />
+                <Blog />
+            </Stack>
+        </Container >
     );
 };
 

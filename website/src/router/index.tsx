@@ -1,21 +1,22 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Suspense, FC } from "react";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes.router";
-import { toast } from 'react-toastify';
+import Loading from "components/utils/loading";
 
-toast.configure({
-  autoClose: false
-});
+// import { toast } from 'react-toastify';
 
-const Router: React.FC = () => {
+// toast.configure({
+//   autoClose: false
+// });
+
+const Router: FC = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="">
-          <Routes />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Suspense>
+
   );
 };
 

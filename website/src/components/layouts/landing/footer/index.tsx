@@ -1,9 +1,19 @@
 import { FC } from "react"
+import { styled } from "@mui/material/styles"
+import { Typography } from "@mui/material"
 
-const Footer : FC = () => {
+const Div = styled("footer")(({ theme }) => ({
+  textAlign: "center",
+  padding: "1.5rem 0",
+  "a": {
+    color: theme.palette.primary.main
+  }
+}))
+
+const Footer: FC = () => {
   return (
-    <footer className="footer text-center py-4">
-      <small className="copyright">
+    <Div>
+      <Typography variant="caption">
         Template Copyright &copy;
         <a
           href="https://themes.3rdwavemedia.com/"
@@ -12,8 +22,8 @@ const Footer : FC = () => {
         >
           3rd Wave Media
         </a>
-      </small>
-    </footer>
+      </Typography>
+    </Div>
   )
 }
 
