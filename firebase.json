@@ -14,7 +14,15 @@
         }
       ],
       "headers": [
-        {"source": "/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
+        {
+          "source": "/service-worker.js",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        }
       ]
     }
   },
@@ -26,7 +34,8 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
+    ],
+    "source": "functions"
   },
   "storage": {
     "rules": "storage.rules"
@@ -58,4 +67,3 @@
     "template": "remoteconfig.template.json"
   }
 }
-
