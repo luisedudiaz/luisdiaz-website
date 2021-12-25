@@ -3,8 +3,8 @@ import { FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import AuthProvider, { AuthContext } from "./auth.provider";
 import LinksProvider, { LinksContext } from "./links.provider";
-import { theme } from "../styles/theme";
-import { store } from "../store";
+import { theme } from "styles/theme";
+import { store } from "store";
 
 export const context = {
   auth: AuthContext,

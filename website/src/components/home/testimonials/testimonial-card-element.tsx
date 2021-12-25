@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
-// import { Image } from "../../atoms";
+// import { Image } from "atoms";
 
 export interface ITestimonialCard {
   message: string;

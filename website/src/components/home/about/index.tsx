@@ -1,5 +1,5 @@
 import { FC } from "react";
-// import Image from "../../../atoms/image"
+// import Image from "atoms/image"
 // import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,9 +13,10 @@ const About: FC = () => {
     return (
         <Grid pt={6} container component="section" sx={{
             background: theme => theme.palette.background.paper,
-            p: {
+            px: {
                 xs: 4,
-                md: 8
+                sm: 10,
+                md: 24
             }
         }}>
             <Grid item xs>

@@ -7,9 +7,9 @@ import * as Icons from "@fortawesome/free-brands-svg-icons";
 //   Schema,
 //   Form
 // } from "rsuite";
-import { ModalProps } from "../../types/modal.types";
+import { ModalProps } from "types/modal.types";
 import { library } from "@fortawesome/fontawesome-svg-core";
-// import { Social } from "../../types/social.types";
+// import { Social } from "types/social.types";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { updateDoc, doc, getFirestore, arrayUnion } from "@firebase/firestore";
 // import { FormInstance } from "rsuite/Form";

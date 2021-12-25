@@ -1,6 +1,7 @@
-import React from "react";
+import { Suspense, FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes.router";
+import Loading from "components/utils/loading";
 
 // import { toast } from 'react-toastify';
 
@@ -8,11 +9,14 @@ import Routes from "./routes.router";
 //   autoClose: false
 // });
 
-const Router: React.FC = () => {
+const Router: FC = () => {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Suspense>
+
   );
 };
 

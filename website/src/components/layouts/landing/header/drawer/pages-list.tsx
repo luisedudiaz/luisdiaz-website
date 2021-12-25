@@ -1,6 +1,6 @@
 import { List } from "@mui/material";
 import { FC, useContext } from "react";
-import { context } from "../../../../../providers";
+import { context } from "providers";
 import PageListElement from "./page-list-element";
 
 // const pages: Array<PageList> = [

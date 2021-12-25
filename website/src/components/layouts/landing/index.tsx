@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { Outlet } from "react-router"
 import { Box } from "@mui/material"
-import { DRAWER_WIDTH } from "../../../utils/constants.utils";
+import { DRAWER_WIDTH } from "utils/constants.utils";
 import Footer from "./footer";
 import Header from "./header";
 

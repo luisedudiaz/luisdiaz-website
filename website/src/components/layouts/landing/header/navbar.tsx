@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { AppBar, Toolbar, IconButton, Typography } from '@mui/material'
 import { common } from '@mui/material/colors'
 import { Menu } from '@mui/icons-material';
-import { DRAWER_WIDTH } from '../../../../utils/constants.utils'
+import { DRAWER_WIDTH } from 'utils/constants.utils'
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import { DrawerCreators } from '../../../../store';
+import { DrawerCreators } from 'store';
 
 const Navbar: FC = () => {
     const dispatch = useDispatch()

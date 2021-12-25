@@ -1,6 +1,6 @@
 import { styled, } from "@mui/material/styles";
 import { Drawer } from "@mui/material";
-import { DRAWER_WIDTH } from "../../../../../utils/constants.utils";
+import { DRAWER_WIDTH } from "utils/constants.utils";
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
     '.MuiDrawer-paper': {

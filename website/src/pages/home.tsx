@@ -1,12 +1,10 @@
 import { Container, Divider, Stack } from "@mui/material";
 import { FC } from "react";
-import Home from "../components/home"
-
-const { About, Blog, Featured, Overview, Seo, Testimonials } = Home
+import { About, Blog, Featured, Overview, Seo, Testimonials } from "components/home"
 
 const HomePage: FC = () => {
     return (
-        <Container disableGutters>
+        <Container maxWidth={false} disableGutters>
             <Stack direction="column">
                 <Seo />
                 <About />

@@ -4,8 +4,8 @@ import { Divider, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { common } from "@mui/material/colors";
 import { doc, getFirestore, onSnapshot } from "@firebase/firestore";
-import { User, Header } from "../../../../../types/user.types";
-import { Social } from "../../../../../types/social.types";
+import { User, Header } from "types/user.types";
+import { Social } from "types/social.types";
 
 import SocialsList from "./socials-list";
 import PagesList from "./pages-list";

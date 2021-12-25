@@ -1,5 +1,5 @@
 import { FC } from "react";
-// import { context } from "../../providers";
+// import { context } from "providers";
 // import {
 //   Button,
 //   Form,
@@ -7,9 +7,9 @@ import { FC } from "react";
 //   Schema,
 //   ButtonToolbar,
 // } from "rsuite";
-import { ModalProps } from "../../types/modal.types";
+import { ModalProps } from "types/modal.types";
 // import { useState } from "react";
-// import { Login as ILogin } from "../../types";
+// import { Login as ILogin } from "types";
 // import { FormInstance } from "rsuite/Form";
 
 // const { StringType } = Schema.Types;

@@ -1,11 +1,11 @@
-import React, { FC, Suspense, useContext } from "react";
+import React, { FC, useContext } from "react";
 import { Route, Routes } from "react-router";
-import { context } from "../providers";
-import { getAllowedRoutes } from "../utils/routes.utils";
-import { Roles } from "../types";
-import Layout from "../components/layouts";
-import Loading from "../components/utils/loading";
-import NotFoundPage from "../pages/404";
+import { context } from "providers";
+import { getAllowedRoutes } from "utils/routes.utils";
+import { Roles } from "types";
+import { Landing } from "components/layouts";
+import Loading from "components/utils/loading";
+import NotFoundPage from "pages/404";
 
 const AppRoutes: FC = () => {
   const { roles } = useContext(context.auth);
@@ -16,16 +16,14 @@ const AppRoutes: FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout.Landing />}>
+      <Route path="/" element={<Landing />}>
         {getAllowedRoutes([...roles, Roles.GUEST] as Roles[], links).map(
           (route) => {
             const Page = React.lazy(
-              () => import(`../pages/${route.component}`)
+              () => import(`pages/${route.component}`)
             )
             return <Route key={route.path} path={route.path} element={
-              <Suspense fallback={<Loading />}>
-                <Page />
-              </Suspense>
+              <Page />
             } />
           }
         )}

@@ -3,10 +3,10 @@ import { FC } from 'react'
 import ProjectCards from './project-cards'
 
 const Featured: FC = () => (
-    <Grid pt={6} container component="section" sx={{
-        p: {
+    <Grid py={6} container component="section" sx={{
+        px: {
             xs: 4,
-            md: 8
+            md: 24
         }
     }}>
         <Grid container item mb={3}>

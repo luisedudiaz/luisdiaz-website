@@ -4,7 +4,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Divider, Grid, Typography } from "@mui/material";
 import { FC, useState, useEffect } from "react";
-import { Skills } from "../../../types";
+import { Skills } from "types";
 // import { Link } from "react-router-dom";
 
 library.add(fab)
@@ -19,10 +19,11 @@ const Overview: FC = () => {
         getSkills()
     }, [])
     return (
-        <Grid mt={0} container component="section" sx={{
-            p: {
+        <Grid py={6} container component="section" sx={{
+            px: {
                 xs: 4,
-                md: 8
+                sm: 10,
+                md: 24
             }
         }}>
             <Grid container item mb={3}>

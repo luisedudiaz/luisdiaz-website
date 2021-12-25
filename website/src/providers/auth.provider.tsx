@@ -1,8 +1,8 @@
 import { createContext, FC, useEffect, useState } from "react";
 import { getAuth, User, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 // import { toast } from "react-toastify";
-import { AuthContext as IAuthContext } from "../types/auth.types";
-import { Roles } from "../types";
+import { AuthContext as IAuthContext } from "types/auth.types";
+import { Roles } from "types";
 
 export const AuthContext = createContext<IAuthContext>({
   isLoggedIn: false,

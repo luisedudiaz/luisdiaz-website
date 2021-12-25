@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import SEO from '../../utils/seo'
+import SEO from 'components/utils/seo'
 
 const Seo: FC = () => {
     return (

@@ -4,7 +4,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { FC } from "react";
-import { PageListProps } from "../../../../../types";
+import { PageListProps } from "types";
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { common } from "@mui/material/colors";

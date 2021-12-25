@@ -1,6 +1,6 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
 import { getFirestore, where, collection, onSnapshot, query } from "firebase/firestore";
-import { Link, LinksContext as ILinksContext } from "../types";
+import { Link, LinksContext as ILinksContext } from "types";
 import { AuthContext } from "./auth.provider";
 
 export const LinksContext = createContext<ILinksContext>({

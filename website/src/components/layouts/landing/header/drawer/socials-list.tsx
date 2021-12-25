@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { styled } from "@mui/material/styles"
-import { PropsSocialList } from "../../../../../types/social.types";
+import { PropsSocialList } from "types/social.types";
 import SocialListElement from "./social-list-element";
 
 const SocialElement = styled("div")(() => ({

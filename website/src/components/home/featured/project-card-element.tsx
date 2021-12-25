@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-// import { Image } from "../../atoms"
+// import { Image } from "atoms"
 
 export interface IProjectCard {
   tags: Array<string>;
