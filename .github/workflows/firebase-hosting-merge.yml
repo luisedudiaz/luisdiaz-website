@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - env:
-        REACT_APP_APIKEY: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_PID: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_SB: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_SID: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_APPID: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_MID: ${{ secrets.REACT_APP_APIKEY}}
-        REACT_APP_UID: ${{ secrets.REACT_APP_APIKEY}}
       - run: cd website && npm ci && npm run build
+        env:
+        REACT_APP_APIKEY: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_AUTHDOMAIN: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_PID: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_SB: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_SID: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_APPID: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_MID: ${{ secrets.REACT_APP_APIKEY }}
+        REACT_APP_UID: ${{ secrets.REACT_APP_APIKEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
