@@ -12,7 +12,20 @@ jobs:
     environment: website
     steps:
       - uses: actions/checkout@v2
-      - run: cd website && npm ci && npm run build
+      - run: |
+          cd website
+          echo '${{ secrets.REACT_APP_APIKEY }}'
+          npm ci
+          npm run build
+        env:
+          REACT_APP_APIKEY: "${{ secrets.REACT_APP_APIKEY }}"
+          REACT_APP_AUTHDOMAIN: "${{ secrets.REACT_APP_AUTHDOMAIN }}"
+          REACT_APP_PID: "${{ secrets.REACT_APP_PID }}"
+          REACT_APP_SB: "${{ secrets.REACT_APP_SB }}"
+          REACT_APP_SID: "${{ secrets.REACT_APP_SID }}"
+          REACT_APP_APPID: "${{ secrets.REACT_APP_APPID }}"
+          REACT_APP_MID: "${{ secrets.REACT_APP_MID }}"
+          REACT_APP_UID: "${{ secrets.REACT_APP_UID }}"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
